@@ -44,261 +44,374 @@ const DIVISIONS = [
   },
 ]
 
-// ─── HOME PAGE ─────────────────────────────────────────────────────────────
+// ─── HOME PAGE (PUBLIC LANDING) ────────────────────────────────────────────
 function homePage(): string {
-  return layout('Command Center', `
+  return layout('Mansas Moguls', `
 
-<!-- ══════════════════════════ HERO ══════════════════════════ -->
-<section style="min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(162deg,#FFFFFF 0%,#F8F9FC 48%,#EEF0FB 100%);padding-top:88px;position:relative">
+<!-- ═══════════════════ CINEMATIC 3D EMPIRE COMMAND CENTER ═══════════════════ -->
+<section style="min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(180deg,#F8F7F3 0%,#FFFFFF 50%,#EEF0F7 100%);padding:80px 20px;position:relative;perspective:1200px">
 
-  <!-- Radial background glows -->
+  <!-- Animated grid background -->
   <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden">
-    <div class="hero-glow" style="width:900px;height:600px;background:radial-gradient(ellipse,rgba(67,56,202,.05) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-55%)"></div>
-    <div class="hero-glow" style="width:600px;height:380px;background:radial-gradient(ellipse,rgba(199,154,56,.06) 0%,transparent 60%);top:38%;left:50%;transform:translate(-50%,-50%);animation-delay:3.5s"></div>
-    <div class="hero-glow" style="width:400px;height:260px;background:radial-gradient(ellipse,rgba(139,92,246,.04) 0%,transparent 65%);top:60%;left:30%;animation-delay:6s"></div>
+    <div style="position:absolute;inset:0;background-image:linear-gradient(0deg,rgba(212,175,55,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.03) 1px,transparent 1px);background-size:80px 80px;animation:gridDrift 40s linear infinite"></div>
+
+    <!-- Radial glows -->
+    <div style="position:absolute;top:50%;left:50%;width:1200px;height:1200px;background:radial-gradient(circle,rgba(109,53,255,.08) 0%,transparent 70%);transform:translate(-50%,-50%);filter:blur(40px)"></div>
+    <div style="position:absolute;top:35%;left:50%;width:900px;height:900px;background:radial-gradient(circle,rgba(212,175,55,.06) 0%,transparent 70%);transform:translate(-50%,-50%);filter:blur(60px);animation:glowPulse 6s ease-in-out infinite"></div>
   </div>
 
-  <!-- LEFT HUD -->
-  <div class="fade-up d1 hero-hud-left" style="position:absolute;top:150px;left:44px;width:188px">
-    <div class="label" style="margin-bottom:18px;color:#94A3B8;display:flex;align-items:center;gap:8px">
-      <span style="width:16px;height:1px;background:rgba(199,154,56,.4);display:inline-block"></span>
-      MM // ECOSYSTEM v2.0
-    </div>
-    <div style="display:flex;flex-direction:column;gap:14px">
-      ${[
-        ['NETWORK STATUS','OPTIMAL','#10B981'],
-        ['CAPITAL STATE','DEPLOYED','#C79A38'],
-        ['ECOSYSTEM','EXPANDING','#10B981'],
-        ['GROWTH VECTOR','EXPONENTIAL','#8B5CF6'],
-      ].map(([k,v,c])=>`
-      <div class="metric">
-        <div class="annotation" style="margin-bottom:4px">${k}</div>
-        <div class="font-mono" style="font-size:10.5px;color:${c};font-weight:600;letter-spacing:.1em;display:flex;align-items:center;gap:5px">
-          <span style="width:5px;height:5px;border-radius:50%;background:${c};box-shadow:0 0 5px ${c};display:inline-block;flex-shrink:0"></span>${v}
-        </div>
-      </div>`).join('')}
-    </div>
-    <div style="margin-top:24px;padding-top:18px;border-top:1px solid rgba(199,154,56,.1)">
-      <div class="annotation" style="margin-bottom:10px">CORE PILLARS</div>
-      ${['CAPITAL INTELLIGENCE','OPERATIONAL EXCELLENCE','STRATEGIC ACQUISITIONS','TALENT SYSTEMS','LEGACY BUILDING'].map(p=>`
-      <div class="font-mono" style="font-size:8px;color:#475569;letter-spacing:.08em;margin-bottom:6px;display:flex;align-items:center;gap:7px">
-        <span style="color:rgba(199,154,56,.55);font-size:7px">◆</span>${p}
-      </div>`).join('')}
-    </div>
-  </div>
+  <!-- Main 3D isometric command center -->
+  <div style="position:relative;z-index:2;width:100%;max-width:1400px;perspective:1200px">
 
-  <!-- RIGHT HUD -->
-  <div class="fade-up d2 hero-hud-right" style="position:absolute;top:150px;right:44px;width:210px">
-    <div class="annotation" style="margin-bottom:16px;text-align:right;color:#94A3B8;display:flex;align-items:center;justify-content:flex-end;gap:8px">
-      PORTFOLIO METRICS
-      <span style="width:16px;height:1px;background:rgba(199,154,56,.4);display:inline-block"></span>
-    </div>
+    <!-- Central 3D monument container -->
+    <div style="position:relative;display:flex;align-items:center;justify-content:center;min-height:700px;width:100%">
 
-    <!-- Mini sparkline -->
-    <div class="glass" style="border-radius:16px;padding:16px;margin-bottom:16px">
-      <div class="annotation" style="margin-bottom:10px;color:#64748B">GROWTH TRAJECTORY</div>
-      <svg viewBox="0 0 180 64" style="width:100%;display:block">
-        <defs>
-          <linearGradient id="hcg" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#4338CA" stop-opacity=".7"/>
-            <stop offset="100%" stop-color="#C79A38" stop-opacity="1"/>
-          </linearGradient>
-          <linearGradient id="hcgf" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#C79A38" stop-opacity=".2"/>
-            <stop offset="100%" stop-color="#C79A38" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <polygon points="0,62 22,56 50,46 82,33 112,19 138,11 160,5 180,1 180,64 0,64" fill="url(#hcgf)"/>
-        <polyline points="0,62 22,56 50,46 82,33 112,19 138,11 160,5 180,1" fill="none" stroke="url(#hcg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        ${[[22,56],[82,33],[138,11],[180,1]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="#C79A38" opacity=".9"/>`).join('')}
-      </svg>
-      <div class="font-mono" style="font-size:8px;color:#10B981;letter-spacing:.12em;margin-top:6px">↑ EXPONENTIAL TRAJECTORY</div>
-    </div>
+      <!-- Layered glass platforms (3D depth) -->
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) perspective(1200px)">
 
-    <div style="display:flex;flex-direction:column;gap:9px">
-      ${[['PORTFOLIO','7+ Companies'],['PRODUCTS','14 Active'],['TEAM','38 Operators'],['TARGET','$1.2B+']].map(([l,v])=>`
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(199,154,56,.06)">
-        <span class="annotation">${l}</span>
-        <span class="font-display" style="font-size:11.5px;font-weight:700;color:#0F172A">${v}</span>
-      </div>`).join('')}
-    </div>
-  </div>
+        <!-- Bottom marble base layer -->
+        <div style="position:absolute;width:600px;height:200px;background:linear-gradient(180deg,#F5F3EE 0%,#E8E4DB 50%,#D4CFBE 100%);border-radius:0 0 40px 40px;box-shadow:0 40px 80px rgba(0,0,0,.1),0 0 1px rgba(212,175,55,.4) inset;transform:translateZ(-60px) rotateX(5deg);opacity:.95"></div>
 
-  <!-- CENTER HERO -->
-  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 24px;position:relative;z-index:2">
+        <!-- Middle navy glass layer -->
+        <div style="position:absolute;width:580px;height:280px;background:linear-gradient(180deg,rgba(16,22,74,.5) 0%,rgba(7,10,45,.6) 100%);border-radius:0 0 30px 30px;backdrop-filter:blur(20px);border:1px solid rgba(212,175,55,.15);box-shadow:0 20px 60px rgba(7,10,45,.3),inset 0 1px 0 rgba(255,255,255,.1);transform:translateZ(-30px) rotateX(3deg)"></div>
 
-    <!-- 3D Crown with orbital rings -->
-    <div class="fade-up d2" style="position:relative;margin-bottom:52px;width:360px;height:290px;flex-shrink:0">
+        <!-- Top glass layer with glow -->
+        <div style="position:absolute;width:560px;height:360px;background:linear-gradient(180deg,rgba(255,255,255,.5) 0%,rgba(238,240,247,.3) 100%);border-radius:30px;backdrop-filter:blur(30px);border:2px solid rgba(212,175,55,.25);box-shadow:0 0 40px rgba(109,53,255,.2),inset 0 1px 20px rgba(255,255,255,.3);transform:translateZ(0px)"></div>
 
-      <!-- Orbital rings container -->
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-54%);pointer-events:none">
-        <!-- Ring 1 – gold -->
-        <div style="position:absolute;top:-65px;left:-165px;width:330px;height:130px;border:1.5px solid rgba(199,154,56,.22);border-radius:50%;animation:orbit1 15s linear infinite;filter:drop-shadow(0 0 4px rgba(199,154,56,.2))"></div>
-        <!-- Ring 2 – indigo -->
-        <div style="position:absolute;top:-50px;left:-130px;width:260px;height:100px;border:1px solid rgba(67,56,202,.16);border-radius:50%;animation:orbit2 11s linear infinite"></div>
-        <!-- Ring 3 – violet dashed -->
-        <div style="position:absolute;top:-76px;left:-196px;width:392px;height:152px;border:1px dashed rgba(139,92,246,.1);border-radius:50%;animation:orbit3 24s linear infinite"></div>
-
-        <!-- Orbital dot – gold -->
-        <div style="position:absolute;top:-65px;left:-165px;width:330px;height:130px;border-radius:50%;animation:orbit1 15s linear infinite">
-          <div style="position:absolute;top:-6px;left:50%;width:11px;height:11px;background:radial-gradient(circle,#FFF3C4,#F0D597,#C79A38);border-radius:50%;box-shadow:0 0 10px rgba(199,154,56,.9),0 0 20px rgba(199,154,56,.4);transform:translateX(-50%)"></div>
-        </div>
-        <!-- Orbital dot – indigo -->
-        <div style="position:absolute;top:-50px;left:-130px;width:260px;height:100px;border-radius:50%;animation:orbit2 11s linear infinite">
-          <div style="position:absolute;top:-5px;left:50%;width:9px;height:9px;background:radial-gradient(circle,#A5B4FC,#818CF8,#4338CA);border-radius:50%;box-shadow:0 0 8px rgba(67,56,202,.9),0 0 16px rgba(67,56,202,.4);transform:translateX(-50%)"></div>
-        </div>
-        <!-- Orbital dot – violet -->
-        <div style="position:absolute;top:-76px;left:-196px;width:392px;height:152px;border-radius:50%;animation:orbit3 24s linear infinite">
-          <div style="position:absolute;top:-4px;left:50%;width:7px;height:7px;background:radial-gradient(circle,#DDD6FE,#8B5CF6);border-radius:50%;box-shadow:0 0 7px rgba(139,92,246,.8);transform:translateX(-50%)"></div>
-        </div>
+        <!-- Inner glow (violet energy) -->
+        <div style="position:absolute;width:540px;height:340px;background:radial-gradient(ellipse at 50% 40%,rgba(109,53,255,.15) 0%,transparent 70%);border-radius:25px;transform:translateZ(5px);filter:blur(15px)"></div>
       </div>
 
-      <!-- Crown hexagon badge -->
-      <div style="position:absolute;top:18px;left:50%;animation:floatBadge 6s ease-in-out infinite">
-        <!-- Outer ring SVG -->
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:158px;height:158px">
-          <svg width="158" height="158" viewBox="0 0 158 158">
-            <circle cx="79" cy="79" r="74" fill="none" stroke="rgba(199,154,56,.14)" stroke-width="1" stroke-dasharray="3 9"/>
-            <circle cx="79" cy="79" r="62" fill="none" stroke="rgba(67,56,202,.08)" stroke-width="1" stroke-dasharray="2 12"/>
-          </svg>
-        </div>
-        <!-- Crown body hex -->
-        <div style="width:130px;height:130px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:linear-gradient(145deg,#1E1B4B 0%,#0E0D2E 55%,#07061A 100%);display:flex;align-items:center;justify-content:center;transform:translateX(-50%);animation:glowGold 5s ease-in-out infinite;position:relative">
-          <!-- Inner hex glow -->
-          <div style="position:absolute;inset:12px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);background:radial-gradient(ellipse at 50% 30%,rgba(139,92,246,.15),transparent 65%)"></div>
-          <svg viewBox="0 0 80 72" style="width:66px;height:60px;position:relative;z-index:1">
+      <!-- Central emblem container -->
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10">
+
+        <!-- Floating crown emblem -->
+        <div style="position:relative;width:280px;height:280px;display:flex;align-items:center;justify-content:center;animation:floatCrown 4s ease-in-out infinite">
+          <!-- Rotating gold rings -->
+          <div style="position:absolute;inset:0;border:2px solid rgba(212,175,55,.3);border-radius:50%;animation:rotate1 20s linear infinite"></div>
+          <div style="position:absolute;inset:20px;border:1px solid rgba(212,175,55,.2);border-radius:50%;animation:rotate2 30s linear infinite reverse"></div>
+          <div style="position:absolute;inset:40px;border:1px dashed rgba(139,92,246,.25);border-radius:50%;animation:rotate3 40s linear infinite"></div>
+
+          <!-- Central crown -->
+          <svg viewBox="0 0 120 100" style="width:200px;height:160px;filter:drop-shadow(0 0 30px rgba(212,175,55,.6));position:relative;z-index:2">
             <defs>
-              <linearGradient id="cg2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFF3C4"/>
-                <stop offset="35%" stop-color="#F0D597"/>
-                <stop offset="70%" stop-color="#C79A38"/>
-                <stop offset="100%" stop-color="#8B6914"/>
+              <linearGradient id="crown-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F5D77B"/>
+                <stop offset="40%" stop-color="#D4AF37"/>
+                <stop offset="100%" stop-color="#9B6A16"/>
               </linearGradient>
-              <filter id="crown-glow">
-                <feGaussianBlur stdDeviation="1.2" result="b"/>
-                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              <filter id="crown-shadow">
+                <feGaussianBlur stdDeviation="2" result="b"/>
+                <feOffset in="b" dy="4" result="b"/>
+                <feFlood flood-color="#000" flood-opacity=".3" result="c"/>
+                <feComposite in="c" in2="b" operator="in" result="s"/>
+                <feComposite in="s" in2="SourceGraphic" operator="in" result="s2"/>
+                <feComposite in="SourceGraphic" in2="s2" operator="arithmetic" k2="1" k3="1" result="f"/>
               </filter>
             </defs>
-            <path d="M10 55L14 32L24 48L40 20L56 48L66 32L70 55Z" fill="url(#cg2)" filter="url(#crown-glow)"/>
-            <rect x="10" y="55" width="60" height="8" rx="3.5" fill="url(#cg2)"/>
-            <polygon points="40,17 44,23 40,26 36,23" fill="#6D28D9"/>
-            <circle cx="40" cy="14.5" r="3.5" fill="#A78BFA" opacity=".9"/>
-            <text x="40" y="72" text-anchor="middle" fill="url(#cg2)" font-size="8.5" font-family="Space Grotesk" font-weight="800" letter-spacing="2.5">MM</text>
+            <path d="M20 80L30 40L45 60L60 20L75 60L90 40L100 80Z" fill="url(#crown-gold)" filter="url(#crown-shadow)"/>
+            <rect x="20" y="80" width="80" height="14" rx="5" fill="url(#crown-gold)"/>
+            <circle cx="60" cy="15" r="6" fill="#B694FF" filter="url(#crown-shadow)"/>
+            <polygon points="60,12 65,20 60,22 55,20" fill="#6D35FF"/>
           </svg>
         </div>
-      </div>
 
-      <!-- Platform base stack -->
-      <div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px">
-        ${[
-          ['210px','15px','rgba(199,154,56,.12)','rgba(30,27,75,.95)','rgba(199,154,56,.4)'],
-          ['246px','13px','rgba(30,27,75,.9)','rgba(14,13,40,.98)','rgba(199,154,56,.32)'],
-          ['282px','11px','rgba(14,13,40,.96)','rgba(7,6,22,1)','rgba(199,154,56,.22)'],
-        ].map(([w,h,c1,c2,bc])=>`<div style="width:${w};height:${h};background:linear-gradient(180deg,${c1},${c2});border:1px solid ${bc};border-radius:3px;box-shadow:0 0 24px rgba(67,56,202,.15)"></div>`).join('')}
-        <div style="width:282px;height:2px;background:linear-gradient(90deg,transparent,rgba(67,56,202,.7),rgba(139,92,246,.5),transparent);margin-top:3px;border-radius:99px;box-shadow:0 0 8px rgba(67,56,202,.4)"></div>
-      </div>
-    </div>
-
-    <!-- Main title card -->
-    <div class="glass fade-up d3" style="border-radius:26px;padding:48px 60px;max-width:680px;width:100%;position:relative;box-shadow:0 40px 100px rgba(31,38,135,.08),0 1px 0 rgba(255,255,255,.98) inset">
-
-      <!-- Corner accent brackets -->
-      ${[
-        ['top:16px;left:16px','border-top:1.5px solid rgba(199,154,56,.38);border-left:1.5px solid rgba(199,154,56,.38);border-radius:3px 0 0 0'],
-        ['top:16px;right:16px','border-top:1.5px solid rgba(199,154,56,.38);border-right:1.5px solid rgba(199,154,56,.38);border-radius:0 3px 0 0'],
-        ['bottom:16px;left:16px','border-bottom:1.5px solid rgba(199,154,56,.38);border-left:1.5px solid rgba(199,154,56,.38);border-radius:0 0 0 3px'],
-        ['bottom:16px;right:16px','border-bottom:1.5px solid rgba(199,154,56,.38);border-right:1.5px solid rgba(199,154,56,.38);border-radius:0 0 3px 0'],
-      ].map(([pos,brd])=>`<div style="position:absolute;${pos};width:28px;height:28px;${brd};pointer-events:none"></div>`).join('')}
-
-      <!-- Corner dots -->
-      ${[['top:15px;left:15px'],['top:15px;right:15px'],['bottom:15px;left:15px'],['bottom:15px;right:15px']].map(([p])=>`<div style="position:absolute;${p};width:9px;height:9px;background:radial-gradient(circle,#FFF3C4,#C79A38 50%,#8B6914);border-radius:50%;box-shadow:0 0 7px rgba(199,154,56,.6)"></div>`).join('')}
-
-      <div class="label" style="margin-bottom:18px;letter-spacing:.24em">Building the Future · Owning the Now · Inspiring Forever</div>
-
-      <h1 class="font-display gold-shimmer" style="font-size:clamp(40px,7vw,76px);font-weight:800;letter-spacing:.1em;text-transform:uppercase;line-height:.93;margin-bottom:14px">
-        Mansas<br>Moguls
-      </h1>
-
-      <div class="font-mono" style="font-size:clamp(9px,1.4vw,12.5px);letter-spacing:.38em;color:#64748B;text-transform:uppercase;margin-bottom:26px">
-        — Empire Operating System —
-      </div>
-
-      <p style="font-size:14.5px;color:#64748B;line-height:1.85;max-width:460px;margin:0 auto 38px">
-        A multi-division empire built on capital intelligence, operational supremacy, and long-horizon vision. We don't just build companies — we architect legacies.
-      </p>
-
-      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a href="/divisions" class="btn btn-gold" data-h="1">
-          Explore The System
-          <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
-        </a>
-        <a href="/oracle-os" class="btn btn-outline" data-h="1">
-          Oracle OS
-          <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" opacity=".6"><polyline points="9,18 15,12 9,6"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Status bar -->
-    <div class="fade-up d4 status-bar" style="margin-top:28px;justify-content:center;gap:0">
-      ${[
-        ['SYSTEM','OPTIMAL','#10B981'],
-        ['NETWORK','ACTIVE','#10B981'],
-        ['CAPITAL','HIGH','#F59E0B'],
-        ['GROWTH','EXPONENTIAL','#8B5CF6'],
-      ].map(([l,v,c])=>`
-      <div style="text-align:center;padding:10px 20px;border-right:1px solid rgba(199,154,56,.1)">
-        <div class="annotation" style="color:#94A3B8;margin-bottom:3px">${l}</div>
-        <div class="font-mono" style="font-size:10px;color:${c};font-weight:600;letter-spacing:.1em;display:flex;align-items:center;justify-content:center;gap:4px">
-          <span style="width:4px;height:4px;border-radius:50%;background:${c};display:inline-block"></span>${v}
+        <!-- Premium metal plaque -->
+        <div style="position:absolute;bottom:-120px;left:50%;transform:translateX(-50%);width:520px;text-align:center;z-index:20">
+          <div style="background:linear-gradient(180deg,#D4AF37 0%,#9B6A16 50%,#6B4C0A 100%);padding:28px 40px;border-radius:12px;box-shadow:0 20px 40px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.3),inset 0 -1px 2px rgba(0,0,0,.2);border:1px solid rgba(0,0,0,.2)">
+            <div class="font-display" style="font-size:44px;font-weight:900;color:#0A0A0A;letter-spacing:.08em;line-height:1.1;margin-bottom:4px;text-shadow:0 2px 4px rgba(0,0,0,.3)">MANSAS<br>MOGULS</div>
+            <div class="font-mono" style="font-size:13px;color:#0A0A0A;letter-spacing:.2em;font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.2)">EMPIRE OPERATING SYSTEM</div>
+          </div>
         </div>
-      </div>`).join('')}
+      </div>
+
+      <!-- Violet energy beams (connecting lines) -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5">
+        <defs>
+          <linearGradient id="beam-violet" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="rgba(109,53,255,0)"/>
+            <stop offset="50%" stop-color="#6D35FF"/>
+            <stop offset="100%" stop-color="rgba(109,53,255,0)"/>
+          </linearGradient>
+          <filter id="beam-glow">
+            <feGaussianBlur stdDeviation="2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Six connection beams to divisions (will be positioned by divs) -->
+        <!-- These are drawn by the division cards below -->
+      </svg>
+
+      <!-- Six division platforms (3D modules arranged around center) -->
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+        ${[
+          {id:'moguls-ai',n:'01',title:'Moguls AI',label:'Machine Speed',icon:'🤖',color:'#4338CA',pos:'top-left',angle:'-120deg'},
+          {id:'moguls-studio',n:'02',title:'Moguls Studio',label:'Brand Systems',icon:'🎨',color:'#C79A38',pos:'top-right',angle:'-60deg'},
+          {id:'moguls-growth',n:'03',title:'Moguls Growth',label:'Performance',icon:'📈',color:'#10B981',pos:'right',angle:'0deg'},
+          {id:'moguls-academy',n:'04',title:'Moguls Academy',label:'Next Gen',icon:'🎓',color:'#F59E0B',pos:'bottom-right',angle:'60deg'},
+          {id:'moguls-labs',n:'05',title:'Moguls Labs',label:'R&D',icon:'🧪',color:'#EC4899',pos:'bottom-left',angle:'120deg'},
+          {id:'moguls-intelligence',n:'OS',title:'Moguls Intelligence',label:'Strategic Core',icon:'🧠',color:'#8B5CF6',pos:'left',angle:'180deg'},
+        ].map((d,i)=>`
+        <div style="position:absolute;width:140px;height:140px;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%) ${
+          d.pos === 'top-left' ? 'translate(-280px,-200px)' :
+          d.pos === 'top-right' ? 'translate(280px,-200px)' :
+          d.pos === 'right' ? 'translate(360px,0px)' :
+          d.pos === 'bottom-right' ? 'translate(280px,200px)' :
+          d.pos === 'bottom-left' ? 'translate(-280px,200px)' :
+          'translate(-360px,0px)'
+        };transition:all .3s ease;cursor:pointer">
+
+          <!-- SVG beam from division to center -->
+          <svg style="position:absolute;inset:-200px;width:calc(100% + 400px);height:calc(100% + 400px);pointer-events:none">
+            <line x1="50%" y1="50%" x2="50%" y2="0%" stroke="url(#beam-violet)" stroke-width="2" opacity="0.6" filter="url(#beam-glow)">
+              <animate attributeName="stroke-width" values="2;3;2" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3s" repeatCount="indefinite"/>
+            </line>
+          </svg>
+
+          <!-- Division platform card -->
+          <div style="position:relative;width:100%;height:100%;background:linear-gradient(135deg,rgba(255,255,255,.6) 0%,rgba(238,240,247,.4) 100%);backdrop-filter:blur(16px);border:2px solid ${d.color}30;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;box-shadow:0 0 30px ${d.color}20,inset 0 1px 10px rgba(255,255,255,.3);transition:all .3s ease;hover:box-shadow 0 0 50px ${d.color}35,inset 0 1px 10px rgba(255,255,255,.3)">
+
+            <!-- Division icon -->
+            <div style="font-size:32px;margin-bottom:6px">${d.icon}</div>
+
+            <!-- Division label -->
+            <div class="font-mono" style="font-size:7px;color:#94A3B8;letter-spacing:.1em;margin-bottom:4px;text-align:center;font-weight:600">${d.n}</div>
+            <div class="font-display" style="font-size:11px;font-weight:700;color:${d.color};letter-spacing:.02em;line-height:1.1;margin-bottom:4px;text-align:center">${d.title.split(' ')[1]}</div>
+            <div class="font-mono" style="font-size:6px;color:${d.color};letter-spacing:.08em;font-weight:600">${d.label}</div>
+
+            <!-- Status dot -->
+            <div style="position:absolute;top:6px;right:6px;width:6px;height:6px;border-radius:50%;background:${d.color};box-shadow:0 0 8px ${d.color};opacity:.9"></div>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- HUD panels around the command center -->
+    <div style="position:absolute;inset:0;pointer-events:none;z-index:3">
+
+      <!-- Top left: Mission panel -->
+      <div style="position:absolute;top:60px;left:40px;width:280px;animation:slideInLeft .8s ease-out .2s both;pointer-events:auto">
+        <div style="background:rgba(255,255,255,.7);backdrop-filter:blur(12px);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)">
+          <div class="font-mono" style="font-size:9px;color:#94A3B8;letter-spacing:.12em;margin-bottom:12px;font-weight:600">OUR MISSION</div>
+          <p style="font-size:12px;color:#475569;line-height:1.6;margin:0">To build, acquire, and scale transformative businesses that empower generations and elevate communities.</p>
+        </div>
+      </div>
+
+      <!-- Top right: System status -->
+      <div style="position:absolute;top:60px;right:40px;width:280px;animation:slideInRight .8s ease-out .2s both;pointer-events:auto">
+        <div style="background:rgba(255,255,255,.7);backdrop-filter:blur(12px);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)">
+          <div class="font-mono" style="font-size:9px;color:#94A3B8;letter-spacing:.12em;margin-bottom:12px;font-weight:600">SYSTEM STATUS</div>
+          ${[['NETWORK','OPTIMAL','#10B981'],['CAPITAL','DEPLOYED','#D4AF37'],['ECOSYSTEM','EXPANDING','#8B5CF6']].map(([k,v,c])=>`
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,.05)">
+            <span class="font-mono" style="font-size:9px;color:#94A3B8;letter-spacing:.08em">${k}</span>
+            <span class="font-mono" style="font-size:9px;color:${c};font-weight:600;letter-spacing:.08em">${v}</span>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Bottom left: Core pillars -->
+      <div style="position:absolute;bottom:60px;left:40px;width:280px;animation:slideInLeft .8s ease-out .4s both;pointer-events:auto">
+        <div style="background:rgba(255,255,255,.7);backdrop-filter:blur(12px);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)">
+          <div class="font-mono" style="font-size:9px;color:#94A3B8;letter-spacing:.12em;margin-bottom:12px;font-weight:600">CORE PILLARS</div>
+          ${['Capital Intelligence','Operational Excellence','Strategic Acquisitions','Legacy Building'].map(p=>`
+          <div style="font-size:11px;color:#475569;margin-bottom:6px;display:flex;align-items:center;gap:6px">
+            <span style="width:4px;height:4px;background:#D4AF37;border-radius:50%;flex-shrink:0"></span>${p}
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Bottom right: Portfolio metrics -->
+      <div style="position:absolute;bottom:60px;right:40px;width:280px;animation:slideInRight .8s ease-out .4s both;pointer-events:auto">
+        <div style="background:rgba(255,255,255,.7);backdrop-filter:blur(12px);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)">
+          <div class="font-mono" style="font-size:9px;color:#94A3B8;letter-spacing:.12em;margin-bottom:12px;font-weight:600">PORTFOLIO METRICS</div>
+          ${[['6','Moguls'],['1','Ecosystem'],['∞','Ventures']].map(([n,l])=>`
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(0,0,0,.05)">
+            <span class="font-mono" style="font-size:10px;font-weight:700;color:#D4AF37">${n}</span>
+            <span class="font-mono" style="font-size:10px;color:#94A3B8;letter-spacing:.08em">${l}</span>
+          </div>`).join('')}
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Scroll cue -->
-  <div class="fade-up d5" style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.4">
-    <div class="annotation">SCROLL TO EXPLORE</div>
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C79A38" stroke-width="2.5" style="animation:float 2.2s ease-in-out infinite"><polyline points="6,9 12,15 18,9"/></svg>
+  <!-- Scroll indicator -->
+  <div style="position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.6;animation:float 2.4s ease-in-out infinite;pointer-events:none;z-index:4">
+    <div class="font-mono" style="font-size:8px;color:#94A3B8;letter-spacing:.1em">SCROLL</div>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2.5"><polyline points="6,9 12,15 18,9"/></svg>
+  </div>
+
+  <!-- CSS animations -->
+  <style>
+    @keyframes floatCrown {
+      0%, 100% { transform: translateZ(0px) translateY(0px); }
+      50% { transform: translateZ(20px) translateY(-20px); }
+    }
+    @keyframes rotate1 {
+      from { transform: rotateZ(0deg); }
+      to { transform: rotateZ(360deg); }
+    }
+    @keyframes rotate2 {
+      from { transform: rotateZ(360deg); }
+      to { transform: rotateZ(0deg); }
+    }
+    @keyframes rotate3 {
+      from { transform: rotateZ(0deg); }
+      to { transform: rotateZ(360deg); }
+    }
+    @keyframes gridDrift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(80px, 80px); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</section>
+
+<!-- ═════════════════ THE EMPIRE SYSTEM ═════════════════ -->
+<section id="empire-system" style="padding:120px 0;background:linear-gradient(180deg,#F8F9FC 0%,#F0F3FB 100%);position:relative">
+  <div class="container">
+
+    <div class="reveal" style="text-align:center;margin-bottom:72px">
+      <div class="section-intro-line" style="margin:0 auto 24px"></div>
+      <h2 class="section-title font-display" style="font-size:clamp(28px,4.5vw,54px);color:#0F172A;margin-bottom:18px">
+        The Empire <span class="gold">System</span>
+      </h2>
+      <p style="font-size:15px;color:#64748B;max-width:520px;margin:0 auto;line-height:1.85">
+        Mansas Moguls in the center with six connected specialized divisions. Each operates independently but shares one intelligence core.
+      </p>
+    </div>
+
+    <!-- Ecosystem visualization -->
+    <div style="position:relative;max-width:1000px;margin:0 auto 32px">
+      <svg viewBox="0 0 1000 650" style="width:100%;max-width:100%">
+        <defs>
+          <filter id="system-glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+
+        <!-- Connection lines -->
+        ${[
+          [500, 325, 200, 120, '#4338CA'],
+          [500, 325, 800, 120, '#8B5CF6'],
+          [500, 325, 800, 530, '#C79A38'],
+          [500, 325, 500, 580, '#10B981'],
+          [500, 325, 200, 530, '#F59E0B'],
+          [500, 325, 200, 200, '#EC4899'],
+        ].map(([cx,cy,nx,ny,c])=>`
+        <line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="${c}" stroke-width="2" opacity=".25" filter="url(#system-glow)"/>
+        <circle cx="${nx}" cy="${ny}" r="5" fill="${c}" opacity=".6"/>`).join('')}
+
+        <!-- Center hub -->
+        <g transform="translate(500, 325)">
+          <circle r="45" fill="rgba(199,154,56,.08)" stroke="rgba(199,154,56,.3)" stroke-width="1.5"/>
+          <circle r="35" fill="rgba(30,27,75,.6)" stroke="rgba(199,154,56,.4)" stroke-width="1"/>
+          <text x="0" y="5" text-anchor="middle" fill="#C79A38" font-size="14" font-family="Space Grotesk" font-weight="700">MOGULS</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Six divisions cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px">
+      ${DIVISIONS.map((d,i)=>`
+      <div class="reveal glass-card" style="padding:32px;position:relative;overflow:hidden;animation-delay:${i*.08}s">
+        <div style="position:absolute;top:0;right:0;width:120px;height:120px;background:radial-gradient(circle,${d.glow},transparent 70%);pointer-events:none"></div>
+
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;position:relative;z-index:1">
+          <div style="font-size:28px">${d.emoji}</div>
+          <div style="flex:1">
+            <div class="font-display" style="font-size:16px;font-weight:700;color:${d.color};margin-bottom:2px">${d.title}</div>
+            <div style="font-size:11px;color:#94A3B8;letter-spacing:.1em">${d.tag}</div>
+          </div>
+          <div class="${d.bc}" style="font-size:8px;font-weight:600;padding:4px 10px;border-radius:6px">${d.status}</div>
+        </div>
+
+        <p style="font-size:13px;color:#64748B;line-height:1.7;margin-bottom:16px;position:relative;z-index:1">${d.desc}</p>
+
+        <div style="padding:12px 0;border-top:1px solid rgba(199,154,56,.1);position:relative;z-index:1">
+          <div style="font-size:11px;color:#94A3B8;letter-spacing:.08em;margin-bottom:6px">KEY METRICS</div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:#0F172A;font-weight:600">
+            <span>${d.clients} Clients</span>
+            <span>${d.arr} ARR</span>
+          </div>
+        </div>
+      </div>`).join('')}
+    </div>
   </div>
 </section>
 
-<!-- ══════════════════ NUMBERS BAND ══════════════════ -->
-<div style="background:#070810;position:relative;z-index:2;border-top:1px solid rgba(199,154,56,.1);border-bottom:1px solid rgba(199,154,56,.1)">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(67,56,202,.06) 0%,transparent 70%);pointer-events:none"></div>
-  <div class="container" style="position:relative;z-index:1">
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0">
-      ${[
-        ['7+','Portfolio Companies','#C79A38'],
-        ['$1.2B+','Valuation Target','#8B5CF6'],
-        ['6','Active Divisions','#10B981'],
-        ['38','Elite Operators','#F59E0B'],
-      ].map(([n,l,c],i)=>`
-      <div class="reveal" style="padding:38px 28px;text-align:center;${i<3?'border-right:1px solid rgba(255,255,255,.04)':''}">
-        <div class="font-display" style="font-size:42px;font-weight:800;color:${c};line-height:1;margin-bottom:8px;filter:drop-shadow(0 0 12px ${c}50)">${n}</div>
-        <div class="annotation" style="color:#475569;letter-spacing:.2em">${l}</div>
-      </div>`).join('')}
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════ ECOSYSTEM MAP ══════════════════ -->
-<section style="padding:110px 0;background:linear-gradient(180deg,#F8F9FC 0%,#F0F3FB 100%)">
+<!-- ═════════════════ MEET THE MOGULS ═════════════════ -->
+<section style="padding:120px 0;background:#FFFFFF;position:relative">
   <div class="container">
 
-    <div class="reveal" style="text-align:center;margin-bottom:74px">
-      <div class="section-intro-line" style="margin:0 auto 20px"></div>
-      <div class="label" style="margin-bottom:14px">One Vision · Six Divisions · Infinite Impact</div>
+    <div class="reveal" style="text-align:center;margin-bottom:72px">
+      <div class="section-intro-line" style="margin:0 auto 24px"></div>
       <h2 class="section-title font-display" style="font-size:clamp(28px,4.5vw,54px);color:#0F172A;margin-bottom:18px">
-        The Mansas Moguls<br><span class="gold">Ecosystem Map</span>
+        Meet The <span class="gold">Moguls</span>
       </h2>
-      <p style="font-size:14.5px;color:#64748B;max-width:500px;margin:0 auto;line-height:1.85">
-        Six precision-engineered divisions — each a powerhouse in its domain — connected through one intelligent core.
+      <p style="font-size:15px;color:#64748B;max-width:520px;margin:0 auto;line-height:1.85">
+        Six specialized operators. One unified vision. Each bringing distinct expertise to the ecosystem.
       </p>
     </div>
 
-    <!-- Interactive ecosystem SVG + nodes -->
-    <div style="position:relative;max-width:900px;margin:0 auto">
+    <!-- Premium cards for each division -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px">
+      ${DIVISIONS.map((d,i)=>`
+      <div class="reveal" style="position:relative;animation-delay:${i*.12}s">
+        <div class="glass-card" style="padding:40px;height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden;border:1px solid ${d.color}20">
+
+          <!-- Background glow -->
+          <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle,${d.glow},transparent 65%);pointer-events:none"></div>
+
+          <!-- Icon and status -->
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;position:relative;z-index:1">
+            <div style="font-size:42px">${d.emoji}</div>
+            <div class="${d.bc}" style="font-size:9px;font-weight:700;padding:6px 12px;border-radius:6px;letter-spacing:.1em">${d.status}</div>
+          </div>
+
+          <!-- Title and tag -->
+          <div class="font-display" style="font-size:20px;font-weight:700;color:${d.color};margin-bottom:4px;position:relative;z-index:1">${d.title}</div>
+          <div style="font-size:12px;color:#94A3B8;letter-spacing:.1em;margin-bottom:18px;position:relative;z-index:1">${d.tag.toUpperCase()}</div>
+
+          <!-- Description -->
+          <p style="font-size:13.5px;color:#64748B;line-height:1.8;margin-bottom:28px;position:relative;z-index:1;flex-grow:1">${d.desc}</p>
+
+          <!-- Capabilities -->
+          <div style="margin-bottom:24px;position:relative;z-index:1">
+            <div class="annotation" style="margin-bottom:10px;color:#94A3B8">CAPABILITIES</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              ${d.services.map(s=>`<span style="font-size:11px;padding:6px 10px;background:${d.color}08;border:1px solid ${d.color}22;border-radius:5px;color:${d.color};font-weight:500">${s}</span>`).join('')}
+            </div>
+          </div>
+
+          <!-- Footer metrics -->
+          <div style="padding-top:16px;border-top:1px solid rgba(199,154,56,.1);display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative;z-index:1">
+            <div>
+              <div class="annotation" style="color:#94A3B8;margin-bottom:3px">Clients</div>
+              <div class="font-display" style="font-size:14px;font-weight:700;color:${d.color}">${d.clients}</div>
+            </div>
+            <div>
+              <div class="annotation" style="color:#94A3B8;margin-bottom:3px">Annual Revenue</div>
+              <div class="font-display" style="font-size:14px;font-weight:700;color:${d.color}">${d.arr}</div>
+            </div>
+          </div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>
+</section>
+
+<!-- PLACEHOLDER FOR FUTURE ECOSYSTEM DETAILS (REMOVED OLD SVG) -->
 
       <!-- SVG connector lines with animated particles -->
       <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible" viewBox="0 0 900 580" preserveAspectRatio="xMidYMid meet">
@@ -449,211 +562,138 @@ function homePage(): string {
   </div>
 </section>
 
-<!-- ══════════════════ CORE PILLARS ══════════════════ -->
-<section style="padding:110px 0;background:#FFFFFF">
-  <div class="container">
-
-    <div class="reveal" style="text-align:center;margin-bottom:64px">
-      <div class="section-intro-line" style="margin:0 auto 20px"></div>
-      <div class="label" style="margin-bottom:14px">Foundational Principles</div>
-      <h2 class="section-title font-display" style="font-size:clamp(28px,4vw,52px);color:#0F172A">
-        The Four <span class="gold">Core Pillars</span>
-      </h2>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:24px">
-      ${[
-        {icon:'🏛️',title:'Capital Intelligence',color:'#4338CA',n:'01',desc:'Strategic deployment of capital across high-conviction assets with institutional-grade due diligence and risk architecture that protects and compounds wealth.'},
-        {icon:'⚡',title:'Operational Excellence',color:'#C79A38',n:'02',desc:'AI-powered systems and elite human talent operating in perfect synchrony at every layer — executing with military precision at scale.'},
-        {icon:'🎯',title:'Strategic Acquisitions',color:'#8B5CF6',n:'03',desc:'Identifying undervalued, high-potential businesses and scaling them to category dominance through capital injection and operator deployment.'},
-        {icon:'👑',title:'Legacy Building',color:'#10B981',n:'04',desc:'Constructing entities built to be inherited, not just exited. Empires with staying power, cultural depth, and generational wealth potential.'},
-      ].map((p,i)=>`
-      <div class="reveal glass-card" style="padding:38px 32px;position:relative;overflow:hidden;animation-delay:${i*.1}s">
-        <div style="position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle at top right,${p.color}06,transparent 65%);pointer-events:none"></div>
-        <div style="position:absolute;top:-22px;left:-10px" class="num-accent">${p.n}</div>
-        <div style="width:58px;height:58px;border-radius:16px;background:${p.color}0E;border:1px solid ${p.color}22;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:24px;position:relative;z-index:1">${p.icon}</div>
-        <h3 class="font-display" style="font-size:19px;font-weight:700;color:#0F172A;margin-bottom:13px;position:relative;z-index:1">${p.title}</h3>
-        <p style="font-size:13.5px;color:#64748B;line-height:1.85;position:relative;z-index:1">${p.desc}</p>
-        <div style="margin-top:24px;height:2px;background:linear-gradient(90deg,${p.color}50,${p.color}15,transparent);border-radius:99px"></div>
-      </div>`).join('')}
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ REVENUE ENGINE ══════════════════ -->
-<section style="padding:110px 0;background:#070810;position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(199,154,56,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(199,154,56,.02) 1px,transparent 1px);background-size:80px 80px;pointer-events:none"></div>
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(67,56,202,.08) 0%,transparent 65%);pointer-events:none"></div>
+<!-- ═════════════════ MOGULS INTELLIGENCE OS ═════════════════ -->
+<section id="moguls-intelligence-os" style="padding:120px 0;background:linear-gradient(180deg,#070810 0%,#0F0F1F 100%);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(199,154,56,.01) 1px,transparent 1px),linear-gradient(90deg,rgba(199,154,56,.01) 1px,transparent 1px);background-size:80px 80px;pointer-events:none"></div>
+  <div style="position:absolute;top:0;left:50%;width:1000px;height:600px;background:radial-gradient(ellipse,rgba(67,56,202,.1) 0%,transparent 70%);transform:translate(-50%,-30%);pointer-events:none"></div>
 
   <div class="container" style="position:relative;z-index:1">
 
     <div class="reveal" style="text-align:center;margin-bottom:72px">
-      <div class="section-intro-line" style="margin:0 auto 20px;box-shadow:0 0 12px rgba(199,154,56,.4)"></div>
-      <div class="label" style="margin-bottom:14px;color:#C79A38">Multi-Channel Revenue Architecture</div>
+      <div class="section-intro-line" style="margin:0 auto 24px;box-shadow:0 0 20px rgba(139,92,246,.3)"></div>
       <h2 class="section-title font-display" style="font-size:clamp(28px,4.5vw,54px);color:#F8F9FC;margin-bottom:18px">
-        The Empire <span class="gold">Revenue Engine</span>
+        Moguls <span class="gold">Intelligence OS</span>
       </h2>
-      <p style="font-size:14.5px;color:#475569;max-width:500px;margin:0 auto;line-height:1.85">
-        One client entry point. Five perpetual revenue streams. The flywheel that builds empires.
+      <p style="font-size:15px;color:#94A3B8;max-width:580px;margin:0 auto;line-height:1.85">
+        The strategic intelligence workspace that helps organizations centralize data, monitor operations, analyze competitors, simulate decisions, and generate executive recommendations at scale.
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center" class="two-col">
-
-      <!-- Sankey SVG -->
-      <div class="reveal-left">
-        <svg viewBox="0 0 520 420" style="width:100%">
-          <defs>
-            ${[
-              ['sg1','#C79A38','#4338CA'],
-              ['sg2','#C79A38','#8B5CF6'],
-              ['sg3','#C79A38','#C79A38'],
-              ['sg4','#C79A38','#10B981'],
-              ['sg5','#C79A38','#F59E0B'],
-            ].map(([id,c1,c2])=>`<linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="${c1}" stop-opacity=".95"/><stop offset="100%" stop-color="${c2}" stop-opacity=".9"/></linearGradient>`).join('')}
-            <filter id="sg-glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          </defs>
-
-          <!-- Client entry node -->
-          <rect x="14" y="155" width="96" height="110" rx="12" fill="rgba(199,154,56,.07)" stroke="rgba(199,154,56,.4)" stroke-width="1.5"/>
-          <text x="62" y="195" text-anchor="middle" fill="#C79A38" font-size="11.5" font-family="Space Grotesk" font-weight="700" letter-spacing="1.5">CLIENT</text>
-          <text x="62" y="213" text-anchor="middle" fill="#C79A38" font-size="9" font-family="JetBrains Mono" letter-spacing="1">ENTRY</text>
-          <text x="62" y="228" text-anchor="middle" fill="#64748B" font-size="8" font-family="JetBrains Mono">NODE</text>
-
-          <!-- Flow paths -->
-          ${[
-            {grad:'sg1',label:'Moguls AI',    rev:'$420K',cy:40,  h:28, color:'#4338CA'},
-            {grad:'sg2',label:'Oracle OS',    rev:'$360K',cy:108, h:24, color:'#8B5CF6'},
-            {grad:'sg3',label:'Studio',       rev:'$280K',cy:174, h:18, color:'#C79A38'},
-            {grad:'sg4',label:'Growth',       rev:'$340K',cy:236, h:20, color:'#10B981'},
-            {grad:'sg5',label:'Academy',      rev:'$80K', cy:292, h:14, color:'#F59E0B'},
-          ].map((d,i)=>`
-          <path d="M 110 210 C 210 210 280 ${d.cy+d.h/2} 375 ${d.cy+d.h/2}"
-            fill="none" stroke="url(#${d.grad})" stroke-width="${d.h}" stroke-linecap="round" opacity=".68" filter="url(#sg-glow)">
-            <animate attributeName="stroke-dasharray" from="0 700" to="700 0" dur="${1.2+i*.2}s" fill="freeze" begin="${i*.15}s"/>
-          </path>
-          <rect x="375" y="${d.cy}" width="136" height="${d.h+22}" rx="9"
-            fill="rgba(${d.color==='#4338CA'?'67,56,202':d.color==='#8B5CF6'?'139,92,246':d.color==='#C79A38'?'199,154,56':d.color==='#10B981'?'16,185,129':'245,158,11'},.1)"
-            stroke="rgba(${d.color==='#4338CA'?'67,56,202':d.color==='#8B5CF6'?'139,92,246':d.color==='#C79A38'?'199,154,56':d.color==='#10B981'?'16,185,129':'245,158,11'},.28)" stroke-width="1"/>
-          <text x="443" y="${d.cy+d.h/2+5}" text-anchor="middle" fill="${d.color}" font-size="10.5" font-family="Space Grotesk" font-weight="700">${d.label}</text>
-          <text x="443" y="${d.cy+d.h/2+20}" text-anchor="middle" fill="#64748B" font-size="8.5" font-family="JetBrains Mono">${d.rev}</text>`).join('')}
-        </svg>
-      </div>
-
-      <!-- Revenue bars -->
-      <div class="reveal-right" style="display:flex;flex-direction:column;gap:14px">
-        <div class="label" style="margin-bottom:12px;color:#C79A38">Annual Recurring Revenue Breakdown</div>
-        ${[
-          {label:'Moguls AI',    rev:'$420K ARR', pct:84, color:'#4338CA'},
-          {label:'Oracle OS',   rev:'$360K ARR', pct:72, color:'#8B5CF6'},
-          {label:'Growth',      rev:'$340K ARR', pct:68, color:'#10B981'},
-          {label:'Studio',      rev:'$280K ARR', pct:56, color:'#C79A38'},
-          {label:'Academy',     rev:'$80K ARR',  pct:18, color:'#F59E0B'},
-        ].map(b=>`
-        <div class="glass-dark" style="border-radius:14px;padding:16px 20px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <div style="display:flex;align-items:center;gap:9px">
-              <div style="width:8px;height:8px;border-radius:50%;background:${b.color};box-shadow:0 0 7px ${b.color}90"></div>
-              <span class="font-display" style="font-size:13.5px;font-weight:600;color:#F1F5F9">${b.label}</span>
-            </div>
-            <span class="font-mono" style="font-size:12px;color:${b.color};font-weight:600">${b.rev}</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill" style="width:${b.pct}%;background:linear-gradient(90deg,${b.color}60,${b.color})"></div>
-          </div>
-        </div>`).join('')}
-
-        <div class="glass-dark" style="border-radius:14px;padding:22px 24px;border:1px solid rgba(199,154,56,.26);background:rgba(199,154,56,.04)">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div class="label" style="margin-bottom:6px;color:#C79A38">Total Projected ARR</div>
-              <div class="font-display gold-shimmer" style="font-size:38px;font-weight:800;line-height:1">$1.48M+</div>
-            </div>
-            <div style="text-align:right">
-              <div class="font-mono" style="font-size:9px;color:#10B981;letter-spacing:.14em">↑ EXPONENTIAL</div>
-              <div class="font-mono" style="font-size:9px;color:#475569;letter-spacing:.1em;margin-top:4px">PORTFOLIO Y2</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════ DIVISIONS PREVIEW ══════════════════ -->
-<section style="padding:110px 0;background:#F8F9FC">
-  <div class="container">
-    <div class="reveal" style="text-align:center;margin-bottom:64px">
-      <div class="section-intro-line" style="margin:0 auto 20px"></div>
-      <div class="label" style="margin-bottom:14px">The Empire System</div>
-      <h2 class="section-title font-display" style="font-size:clamp(28px,4vw,52px);color:#0F172A">
-        Five <span class="gold">Precision Divisions</span>
-      </h2>
+    <!-- Flagship product modules -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-bottom:48px">
+      ${[
+        {icon:'🎯',name:'Mission Control',desc:'Real-time operational dashboards with AI-powered anomaly detection'},
+        {icon:'👥',name:'Company Twin',desc:'AI digital twin of your organization for stress-testing and simulation'},
+        {icon:'🔍',name:'Competitor Matrix',desc:'Continuous monitoring and intelligence on competitive landscape'},
+        {icon:'⚡',name:'Simulation Engine',desc:'What-if analysis and decision scenario modeling'},
+        {icon:'🤝',name:'M&A Analysis',desc:'Automated due diligence and acquisition intelligence'},
+        {icon:'📊',name:'Intervention Ledger',desc:'Strategic recommendation engine with decision tracking'},
+      ].map((m,i)=>`
+      <div class="reveal glass-card" style="padding:32px;position:relative;overflow:hidden;border:1px solid rgba(139,92,246,.2);animation-delay:${i*.1}s">
+        <div style="position:absolute;top:0;right:0;width:100px;height:100px;background:radial-gradient(circle,rgba(139,92,246,.1),transparent 70%);pointer-events:none"></div>
+        <div style="font-size:32px;margin-bottom:12px">${m.icon}</div>
+        <div class="font-display" style="font-size:16px;font-weight:700;color:#F8F9FC;margin-bottom:8px">${m.name}</div>
+        <p style="font-size:13px;color:#94A3B8;line-height:1.7">${m.desc}</p>
+      </div>`).join('')}
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:22px">
-      ${DIVISIONS.map((d,i)=>`
-      <a href="/divisions/${d.id}" style="text-decoration:none" class="reveal" data-h="1">
-        <div class="div-card" style="--dc:${d.color};--dc2:${d.color2};padding:30px;height:100%"
-          onmouseover="this.style.borderColor='${d.color}30'"
-          onmouseout="this.style.borderColor=''">
-          <div style="position:absolute;top:0;right:0;width:160px;height:160px;background:radial-gradient(circle at top right,${d.color}06,transparent 65%);pointer-events:none"></div>
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px">
-            <div style="width:56px;height:56px;border-radius:16px;background:${d.color}0E;border:1px solid ${d.color}22;display:flex;align-items:center;justify-content:center;font-size:24px">${d.emoji}</div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
-              <span class="badge ${d.bc}" style="font-size:8px">${d.status}</span>
-              <span class="font-mono" style="font-size:9px;color:#94A3B8">${d.arr} ARR</span>
-            </div>
-          </div>
-          <div class="font-mono" style="font-size:8px;color:#94A3B8;letter-spacing:.16em;margin-bottom:5px">${d.n} / DIVISION</div>
-          <h3 class="font-display" style="font-size:21px;font-weight:700;color:#0F172A;margin-bottom:5px">${d.title}</h3>
-          <p style="font-size:12.5px;color:${d.color};font-weight:600;margin-bottom:13px;letter-spacing:.02em">${d.tag}</p>
-          <p style="font-size:13px;color:#64748B;line-height:1.78;margin-bottom:20px">${d.desc}</p>
-          <div style="display:flex;align-items:center;gap:5px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:700;color:${d.color};letter-spacing:.04em">
-            Deep Dive
-            <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
-          </div>
-        </div>
-      </a>`).join('')}
-    </div>
-
-    <div class="reveal" style="text-align:center;margin-top:48px">
-      <a href="/divisions" class="btn btn-gold" data-h="1">
-        View Full Empire System
-        <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+    <!-- CTAs -->
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:48px">
+      <a href="#" class="btn btn-gold" data-h="1">
+        View Moguls Intelligence OS
+        <svg style="width:14px;height:14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+      </a>
+      <a href="#" class="btn btn-outline" data-h="1">
+        Request Demo
+        <svg style="width:14px;height:14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" opacity=".6"><polyline points="9,18 15,12 9,6"/></svg>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════ CTA BAND ══════════════════ -->
-<section style="padding:110px 0;background:linear-gradient(168deg,#FFFFFF 0%,#F8F9FC 60%,#EEF0FB 100%)">
+<!-- ═════════════════ VENTURES BUILT ═════════════════ -->
+<section style="padding:120px 0;background:#FFFFFF;position:relative">
   <div class="container">
-    <div class="reveal glass" style="border-radius:28px;padding:88px 64px;text-align:center;max-width:840px;margin:0 auto;position:relative;overflow:hidden">
-      <!-- Background glow -->
-      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(67,56,202,.04) 0%,transparent 70%);pointer-events:none"></div>
-      <!-- Corner brackets -->
-      ${[
-        ['top:22px;left:22px','border-top:2px solid rgba(199,154,56,.32);border-left:2px solid rgba(199,154,56,.32);border-radius:4px 0 0 0'],
-        ['top:22px;right:22px','border-top:2px solid rgba(199,154,56,.32);border-right:2px solid rgba(199,154,56,.32);border-radius:0 4px 0 0'],
-        ['bottom:22px;left:22px','border-bottom:2px solid rgba(199,154,56,.32);border-left:2px solid rgba(199,154,56,.32);border-radius:0 0 0 4px'],
-        ['bottom:22px;right:22px','border-bottom:2px solid rgba(199,154,56,.32);border-right:2px solid rgba(199,154,56,.32);border-radius:0 0 4px 0'],
-      ].map(([pos,brd])=>`<div style="position:absolute;${pos};width:34px;height:34px;${brd}"></div>`).join('')}
 
-      <div class="label" style="margin-bottom:18px">Ready to Join the Empire?</div>
-      <h2 class="section-title font-display" style="font-size:clamp(30px,4.5vw,58px);color:#0F172A;margin-bottom:22px">
-        Your Empire Starts With<br><span class="gold">One Request</span>
+    <div class="reveal" style="text-align:center;margin-bottom:72px">
+      <div class="section-intro-line" style="margin:0 auto 24px"></div>
+      <h2 class="section-title font-display" style="font-size:clamp(28px,4.5vw,54px);color:#0F172A;margin-bottom:18px">
+        Ventures Built By <span class="gold">Mansas Moguls</span>
       </h2>
-      <p style="font-size:15px;color:#64748B;max-width:500px;margin:0 auto 44px;line-height:1.88">
-        We are selective about who we work with. If you're building something that deserves empire-grade infrastructure, let's talk.
+      <p style="font-size:15px;color:#64748B;max-width:580px;margin:0 auto;line-height:1.85">
+        Classified venture case files showcasing our portfolio of companies, systems, and strategic partnerships.
       </p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-        <a href="/contact" class="btn btn-gold" data-h="1">
-          Submit Launch Request
-          <svg style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
-        </a>
-        <a href="/oracle-os" class="btn btn-outline" data-h="1">Explore Oracle OS</a>
-      </div>
+    </div>
+
+    <!-- Venture cards -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px">
+      ${[
+        {n:'01',title:'Mansas Moguls Ecosystem',color:'#C79A38',desc:'The master holding company and strategic investment vehicle for our multi-division empire.'},
+        {n:'02',title:'Moguls Intelligence OS',color:'#8B5CF6',desc:'Strategic intelligence platform powering executive decision-making and operational excellence.'},
+        {n:'03',title:'Client AI Automation',color:'#4338CA',desc:'Custom AI systems and agent frameworks deployed across Fortune 500 operations.'},
+        {n:'04',title:'Rochester University Initiative',color:'#10B981',desc:'Strategic partnership advancing AI education and creator monetization systems.'},
+        {n:'05',title:'SaaS Experiments',color:'#F59E0B',desc:'Incubated micro-applications and experimental technologies from Moguls Labs.'},
+      ].map((v,i)=>`
+      <div class="reveal" style="position:relative;animation-delay:${i*.12}s">
+        <div class="glass-card" style="padding:40px;height:100%;position:relative;overflow:hidden;border-left:4px solid ${v.color}">
+          <div style="position:absolute;top:-30px;right:-30px;width:150px;height:150px;background:radial-gradient(circle,${v.color}08,transparent 60%);pointer-events:none"></div>
+
+          <div style="position:relative;z-index:1">
+            <div style="font-size:11px;color:#94A3B8;letter-spacing:.1em;margin-bottom:12px;font-weight:600">CASE FILE ${v.n}</div>
+            <div class="font-display" style="font-size:20px;font-weight:700;color:${v.color};margin-bottom:16px">${v.title}</div>
+            <p style="font-size:13.5px;color:#64748B;line-height:1.8">${v.desc}</p>
+          </div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════ WORK WITH US ═════════════════ -->
+<section style="padding:120px 0;background:linear-gradient(180deg,#F8F9FC 0%,#F0F3FB 100%);position:relative">
+  <div class="container">
+
+    <div class="reveal" style="text-align:center;margin-bottom:72px">
+      <div class="section-intro-line" style="margin:0 auto 24px"></div>
+      <h2 class="section-title font-display" style="font-size:clamp(28px,4.5vw,54px);color:#0F172A;margin-bottom:18px">
+        Work With <span class="gold">Mansas Moguls</span>
+      </h2>
+      <p style="font-size:15px;color:#64748B;max-width:580px;margin:0 auto;line-height:1.85">
+        Three paths to partnership. One unified vision. Let's build the future together.
+      </p>
+    </div>
+
+    <!-- Partnership paths -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;margin-bottom:48px">
+      ${[
+        {icon:'⚙️',title:'Build AI Systems',desc:'Custom AI agents, automation frameworks, and intelligent platforms engineered for your operations.'},
+        {icon:'🚀',title:'Build A Venture',desc:'Incubate new businesses within the Mansas Moguls ecosystem with capital, talent, and strategic support.'},
+        {icon:'🤝',title:'Partner With The Ecosystem',desc:'Strategic partnerships that leverage our divisions for growth, innovation, and market expansion.'},
+      ].map((p,i)=>`
+      <div class="reveal glass-card" style="padding:40px;position:relative;overflow:hidden;animation-delay:${i*.1}s">
+        <div style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(199,154,56,.08),transparent 65%);pointer-events:none"></div>
+
+        <div style="font-size:40px;margin-bottom:16px">${p.icon}</div>
+        <div class="font-display" style="font-size:18px;font-weight:700;color:#0F172A;margin-bottom:12px">${p.title}</div>
+        <p style="font-size:13.5px;color:#64748B;line-height:1.8">${p.desc}</p>
+      </div>`).join('')}
+    </div>
+
+    <!-- Contact form section -->
+    <div class="reveal glass-card" style="max-width:600px;margin:0 auto;padding:48px;text-align:center;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(199,154,56,.08),transparent 70%);pointer-events:none"></div>
+
+      <h3 class="font-display" style="font-size:24px;font-weight:700;color:#0F172A;margin-bottom:16px;position:relative;z-index:1">Start A Conversation</h3>
+      <p style="font-size:14px;color:#64748B;margin-bottom:28px;position:relative;z-index:1">Share your vision, challenge, or opportunity. We'll explore how the ecosystem can help.</p>
+
+      <form style="position:relative;z-index:1;display:flex;flex-direction:column;gap:16px">
+        <input type="email" placeholder="Your email address" style="padding:12px 16px;border:1px solid rgba(199,154,56,.2);border-radius:8px;background:rgba(255,255,255,.5);font-size:14px;font-family:inherit" required/>
+        <textarea placeholder="Brief description of your vision" rows="4" style="padding:12px 16px;border:1px solid rgba(199,154,56,.2);border-radius:8px;background:rgba(255,255,255,.5);font-size:14px;font-family:inherit;resize:vertical" required></textarea>
+        <button type="submit" class="btn btn-gold" style="width:100%">
+          Submit Inquiry
+          <svg style="width:14px;height:14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+        </button>
+      </form>
     </div>
   </div>
 </section>
