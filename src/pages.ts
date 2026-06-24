@@ -522,34 +522,22 @@ function homePage(): string {
 <script>
 // Show HUDs only on wide screens
 function updateHUDs(){
-  const show = window.innerWidth >= 1280;
-  document.querySelectorAll('.hero-hud-left,.hero-hud-right').forEach(el=>{
-    (el as HTMLElement).style.display = show ? 'block' : 'none';
+  var show = window.innerWidth >= 1280;
+  document.querySelectorAll('.hero-hud-left,.hero-hud-right').forEach(function(el){
+    el.style.display = show ? 'block' : 'none';
   });
 }
 updateHUDs();
 window.addEventListener('resize', updateHUDs, {passive:true});
 
 // Subtle parallax on crown
-document.addEventListener('mousemove', e=>{
-  const cx = window.innerWidth/2, cy = window.innerHeight/2;
-  const rx = (e.clientY-cy)/cy * -6;
-  const ry = (e.clientX-cx)/cx * 6;
-  const crown = document.querySelector('[style*="floatBadge"]') as HTMLElement;
+document.addEventListener('mousemove', function(e){
+  var cx = window.innerWidth/2, cy = window.innerHeight/2;
+  var rx = (e.clientY-cy)/cy * -6;
+  var ry = (e.clientX-cx)/cx * 6;
+  var crown = document.querySelector('[style*="floatBadge"]');
   if(crown) crown.style.setProperty('--rx', rx+'deg');
 });
-
-// Animate progress bars when in view
-const barObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.querySelectorAll('.progress-fill').forEach(bar=>{
-        (bar as HTMLElement).style.width = (bar as HTMLElement).dataset.w || (bar as HTMLElement).style.width;
-      });
-    }
-  });
-},{threshold:.3});
-document.querySelectorAll('.progress-track').forEach(t=>barObs.observe(t));
 </script>
 `, 'home')
 }
