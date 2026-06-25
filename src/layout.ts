@@ -226,7 +226,7 @@ export const globalCSS = `
     display:flex;align-items:center;justify-content:space-between;
   }
   .nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none}
-  .nav-links{display:flex;align-items:center;gap:44px}
+  .nav-links{display:flex;align-items:center;gap:28px}
   .nav-link{
     font-family:'Space Grotesk',sans-serif;font-size:11px;
     font-weight:700;letter-spacing:.12em;text-transform:uppercase;
@@ -682,6 +682,7 @@ export const globalCSS = `
 
   /* ── MOBILE ── */
   .mobile-menu{display:none}
+  .mobile-menu.open{display:block}
   @media(max-width:920px){
     .nav-links,.nav-cta{display:none!important}
     .mobile-toggle{display:flex!important}
@@ -771,8 +772,10 @@ export function layout(title: string, body: string, activePage: string = ''): st
     </a>
     <nav class="nav-links">
       <a href="/" class="nav-link ${activePage==='home'?'active':''}" aria-current="${activePage==='home'?'page':''}">Home</a>
-      <a href="/divisions" class="nav-link ${activePage==='divisions'||activePage==='division'?'active':''}" aria-current="${activePage==='divisions'||activePage==='division'?'page':''}">The System</a>
-      <a href="/oracle-os" class="nav-link ${activePage==='oracle'?'active':''}" aria-current="${activePage==='oracle'?'page':''}">Oracle OS</a>
+      <a href="/#system" class="nav-link ${activePage==='divisions'||activePage==='division'?'active':''}" aria-current="${activePage==='divisions'||activePage==='division'?'page':''}">The System</a>
+      <a href="/#moguls" class="nav-link">The Moguls</a>
+      <a href="/#ventures" class="nav-link">Ventures</a>
+      <a href="/moguls-intelligence-os" class="nav-link ${activePage==='intelligence'?'active':''}" aria-current="${activePage==='intelligence'?'page':''}">Moguls Intelligence OS</a>
       <a href="/about" class="nav-link ${activePage==='about'?'active':''}" aria-current="${activePage==='about'?'page':''}">About</a>
     </nav>
     <div class="nav-cta">
@@ -785,7 +788,7 @@ export function layout(title: string, body: string, activePage: string = ''): st
     </button>
   </div>
   <div id="mmenu" class="mobile-menu" style="background:rgba(248,249,252,.97);backdrop-filter:var(--blur-glass);border-top:1px solid rgba(199,154,56,.1);padding:12px 22px 22px">
-    ${[['Home','/'],['The System','/divisions'],['Oracle OS','/oracle-os'],['About','/about']].map(([l,h])=>`<a href="${h}" style="display:block;padding:12px 0;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#475569;text-decoration:none;border-bottom:1px solid rgba(199,154,56,.07)">${l}</a>`).join('')}
+    ${[['Home','/'],['The System','/#system'],['The Moguls','/#moguls'],['Ventures','/#ventures'],['Moguls Intelligence OS','/moguls-intelligence-os'],['About','/about']].map(([l,h])=>`<a href="${h}" style="display:block;padding:12px 0;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:#475569;text-decoration:none;border-bottom:1px solid rgba(199,154,56,.07)">${l}</a>`).join('')}
     <a href="/contact" class="btn btn-gold" style="margin-top:16px;width:100%;justify-content:center" aria-label="Submit launch request from mobile menu">Launch Request</a>
   </div>
 </nav>
@@ -829,7 +832,7 @@ ${body}
 
       <div>
         <div class="label" style="margin-bottom:18px;color:var(--color-gold)">Platform</div>
-        ${[['Oracle OS','/oracle-os'],['About','/about'],['Contact','/contact']].map(([l,h])=>`<a href="${h}" style="display:block;font-size:13px;color:#64748B;text-decoration:none;margin-bottom:10px;transition:color var(--duration-fast)" onmouseover="this.style.color='var(--color-gold)'" onmouseout="this.style.color='#64748B'">${l}</a>`).join('')}
+        ${[['Moguls Intelligence OS','/moguls-intelligence-os'],['About','/about'],['Contact','/contact']].map(([l,h])=>`<a href="${h}" style="display:block;font-size:13px;color:#64748B;text-decoration:none;margin-bottom:10px;transition:color var(--duration-fast)" onmouseover="this.style.color='var(--color-gold)'" onmouseout="this.style.color='#64748B'">${l}</a>`).join('')}
       </div>
 
       <div>

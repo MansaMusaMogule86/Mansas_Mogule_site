@@ -1,7 +1,16 @@
 import { Hono } from 'hono'
+import { serve } from '@hono/node-server'
+import { createClient } from '@supabase/supabase-js'
 import { getPage } from './pages'
+import { env, hasSupabaseConfig } from './env'
 
 const app = new Hono()
+
+const supabase = hasSupabaseConfig
+  ? createClient(env.supabaseUrl, env.supabaseAnonKey, {
+      auth: { persistSession: false },
+    })
+  : null
 
 // Favicon — inline SVG crown
 app.get('/favicon.ico', (c) => {
@@ -11,7 +20,7 @@ app.get('/favicon.ico', (c) => {
 })
 
 app.get('/', (c) => c.html(getPage('home')))
-app.get('/oracle-os', (c) => c.html(getPage('oracle')))
+app.get('/moguls-intelligence-os', (c) => c.html(getPage('intelligence')))
 app.get('/divisions', (c) => c.html(getPage('divisions')))
 app.get('/divisions/:slug', (c) => {
   const slug = c.req.param('slug')
@@ -19,5 +28,25 @@ app.get('/divisions/:slug', (c) => {
 })
 app.get('/about', (c) => c.html(getPage('about')))
 app.get('/contact', (c) => c.html(getPage('contact')))
+
+// Health check endpoint
+app.get('/health', (c) =>
+  c.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    supabaseConfigured: Boolean(supabase),
+  })
+)
+
+// Start server
+serve({
+  fetch: app.fetch,
+  port: env.port,
+  hostname: env.host,
+})
+
+console.log(`✨ Mansas Moguls Empire OS`)
+console.log(`🚀 Server running on http://${env.host}:${env.port}`)
+console.log(`📡 Environment: ${env.nodeEnv}`)
 
 export default app

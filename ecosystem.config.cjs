@@ -1,16 +1,17 @@
 module.exports = {
   apps: [
     {
-      name: 'webapp',
-      script: 'npx',
-      args: 'wrangler pages dev dist --ip 0.0.0.0 --port 3000',
+      name: 'mansas-moguls',
+      script: 'dist/index.js',
       env: {
-        NODE_ENV: 'development',
-        PORT: 3000
+        NODE_ENV: 'production',
+        PORT: 3000,
+        HOST: '0.0.0.0'
       },
       watch: false,
       instances: 1,
-      exec_mode: 'fork'
+      exec_mode: 'cluster',
+      merge_logs: true
     }
   ]
 }
